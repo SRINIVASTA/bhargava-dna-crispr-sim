@@ -11,8 +11,8 @@ This repository is custom-engineered for **Track 1: Bioinformatics and DNA Analy
 2. **Block 2: Sequencer IO & Biopython Registry Engine** — Ingests `.fasta` strands and generates translation models.
 3. **Block 3: Telemetry Dashboard & Matrix Visualization** — Calculates variant spikes using $p < 0.05$ and drives high-contrast visuals.
 
-## 📺 Streamlit Lit Dasb Board
-![CRISPR Dashboard Live Demo]([dashboard_demo.gif](https://bhargava-dna-crispr-sim-yj9ywkajsqjkik4zqdduxr.streamlit.app/))
+## 📺 Streamlit Lit Dash Board
+![CRISPR Dashboard Live Demo]([https://bhargava-dna-crispr-sim-yj9ywkajsqjkik4zqdduxr.streamlit.app/])
 
 ## 🚀 Quick Local Deployment
 
