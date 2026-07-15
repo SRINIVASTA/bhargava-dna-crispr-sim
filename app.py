@@ -21,7 +21,7 @@ st.markdown("""
     h1 {color: #e056fd; font-weight: 800; font-family: 'Courier New', monospace;}
     .reportview-container .main .block-container{ max-width: 95%; }
     </style>
-""", unsafe_allowed_html=True)
+""", unsafe_allow_html=True)
 
 # ----------------------------------------------------------------------------------------------------
 # MAIN HEADER BLOCK: Track 1 Dedication & Scientific Tribute
@@ -57,7 +57,7 @@ if target_start >= target_end:
     st.stop()
 
 # ----------------------------------------------------------------------------------------------------
-# BLOCK 2: SEQUENCING CONTEXT & Live BIOPYTHON IO PIPELINE
+# BLOCK 2: SEQUENCING CONTEXT & LIVE BIOPYTHON IO PIPELINE
 # ----------------------------------------------------------------------------------------------------
 st.subheader("📂 Step 1: Input Genomic FASTA Data Context")
 
