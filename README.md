@@ -1,9 +1,5 @@
 # 🧬 bhargava-dna-crispr-sim
 
-[![Streamlit App](https://streamlit.io)](https://streamlit.io)
-[![Python 3.10+](https://shields.io)](https://python.org)
-[![Biopython](https://shields.io)](https://biopython.org)
-[![License: MIT](https://shields.io)](https://opensource.org)
 
 An interactive molecular biology platform modeling CRISPR-Cas9 target cleavage matrices and oncology-driven variant patterns using automated hypothesis validation frameworks.
 
@@ -15,8 +11,8 @@ This repository is custom-engineered for **Track 1: Bioinformatics and DNA Analy
 2. **Block 2: Sequencer IO & Biopython Registry Engine** — Ingests `.fasta` strands and generates translation models.
 3. **Block 3: Telemetry Dashboard & Matrix Visualization** — Calculates variant spikes using $p < 0.05$ and drives high-contrast visuals.
 
-## 📺 Live Dashboard Preview
-![CRISPR Dashboard Live Demo](dashboard_demo.gif)
+## 📺 Streamlit Lit Dasb Board
+![CRISPR Dashboard Live Demo]([dashboard_demo.gif](https://bhargava-dna-crispr-sim-yj9ywkajsqjkik4zqdduxr.streamlit.app/))
 
 ## 🚀 Quick Local Deployment
 
