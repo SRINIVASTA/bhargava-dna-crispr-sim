@@ -12,7 +12,7 @@ This repository is custom-engineered for **Track 1: Bioinformatics and DNA Analy
 3. **Block 3: Telemetry Dashboard & Matrix Visualization** — Calculates variant spikes using $p < 0.05$ and drives high-contrast visuals.
 
 ## 📺 Streamlit Lit Dash Board
-![CRISPR Dashboard Live Demo]([https://bhargava-dna-crispr-sim-yj9ywkajsqjkik4zqdduxr.streamlit.app/])
+[CRISPR Dashboard Live Demo]([https://bhargava-dna-crispr-sim-yj9ywkajsqjkik4zqdduxr.streamlit.app/])
 
 ## 🚀 Quick Local Deployment
 
