@@ -144,8 +144,8 @@ def compute_live_inference_probabilities(sequence):
 # Execute live calculation against uploaded ref sequence
 computed_inference_weights = compute_live_inference_probabilities(ref_seq)
 
-# Build visual splitting rows to map the active deep learning tracking metrics
-visual_col1, visual_col2 = st.columns()
+# FIXED: Provided explicit layout dimensions '2' to st.columns to resolve structural exception errors
+visual_col1, visual_col2 = st.columns(2)
 
 with visual_col1:
     st.markdown("#### 📈 Real-Time Deep Learning Sequence Susceptibility Profiling")
