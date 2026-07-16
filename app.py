@@ -7,25 +7,31 @@ import seaborn as sns
 from Bio import SeqIO
 from scipy import stats
 
-# Establish screen parameters and workspace formatting templates
+# 1. EMULATE CINEMATIC 4K HIGH-CONTRAST CANVAS
 st.set_page_config(
     page_title="Dr. P.M. Bhargava DNA Validation Suite", 
     page_icon="🧬", 
     layout="wide"
 )
 
-# Custom dark-mode styling overrides to isolate boundaries during screen recording
+# Dark navy digital canvas theme overrides matching your cinematic video profile
 st.markdown("""
     <style>
-    .block-container {padding-top: 1.5rem; padding-bottom: 0rem;}
-    h1 {color: #e056fd; font-weight: 800; font-family: 'Courier New', monospace;}
-    .reportview-container .main .block-container{ max-width: 95%; }
+    /* Dark Navy Canvas Background */
+    .stApp { background-color: #0b132b; color: #e0e1dd; }
+    .block-container { padding-top: 1.5rem; padding-bottom: 0rem; }
+    
+    /* Neon Pink/Magenta Accents for CRISPR Targets */
+    h1 { color: #e056fd; font-weight: 800; font-family: 'Courier New', monospace; text-shadow: 0 0 10px rgba(224, 86, 253, 0.3); }
+    h2, h3 { color: #48dbfb; font-family: 'Courier New', monospace; }
+    
+    /* Technical minimalist card formatting */
+    div[data-testid="stMetricValue"] { color: #fffa65 !important; font-family: 'Courier New', monospace; font-size: 2rem !important; }
+    .stMarkdown { font-family: 'Inter', sans-serif; }
     </style>
 """, unsafe_allow_html=True)
 
-# ----------------------------------------------------------------------------------------------------
 # MAIN HEADER BLOCK: Track 1 Dedication & Scientific Tribute
-# ----------------------------------------------------------------------------------------------------
 st.title("🧬 Dr. P.M. Bhargava Memorial DNA & CRISPR Validation Suite")
 st.markdown("""
     **Track 1: Bioinformatics and DNA Analysis**  
@@ -36,9 +42,7 @@ st.markdown("""
 """)
 st.markdown("---")
 
-# ----------------------------------------------------------------------------------------------------
-# BLOCK 1: SIMULATOR VARIABLES & PHYSICS CONTROLS (Sidebar Engine UI)
-# ----------------------------------------------------------------------------------------------------
+# 2. CONFIGURATION SIDEBAR (BLOCK 1)
 st.sidebar.header("🎛️ Physics & Simulation Controls")
 st.sidebar.markdown("*Adjust variables to observe real-time variant transformations.*")
 
@@ -56,9 +60,7 @@ if target_start >= target_end:
     st.sidebar.error("Coordinate Error: Start position must sit lower than end position.")
     st.stop()
 
-# ----------------------------------------------------------------------------------------------------
-# BLOCK 2: SEQUENCING CONTEXT & LIVE BIOPYTHON IO PIPELINE
-# ----------------------------------------------------------------------------------------------------
+# 3. BLOCK 2: SEQUENCING CONTEXT & LIVE BIOPYTHON IO PIPELINE
 st.subheader("📂 Step 1: Input Genomic FASTA Data Context")
 
 # Built-in clinical target: Human TP53 tumor suppressor coding transcript excerpt
@@ -100,9 +102,7 @@ with col2:
 
 st.markdown("---")
 
-# ----------------------------------------------------------------------------------------------------
-# BLOCK 3: CLINICAL TELEMETRY DASHBOARD & HIGH-CONTRAST HEATMAP ENGINE
-# ----------------------------------------------------------------------------------------------------
+# 4. BLOCK 3: CLINICAL TELEMETRY DASHBOARD & HEATMAP
 st.subheader("📊 Step 2: Cohort Variant Deletion Matrix & Peak Telemetry")
 
 # Initialize seed for consistent, deterministic visual simulation capturing
@@ -110,15 +110,16 @@ np.random.seed(42)
 mutation_matrix = np.zeros((n_patients, n_bases))
 crispr_success_mask = np.random.rand(n_patients) < crispr_efficiency
 
+# Variable safeguards to prevent rendering text collisions
+binary_options = [1, 0]
+
 # Build variant profiling states across the sample rows
 for patient_idx in range(n_patients):
     for pos in range(n_bases):
         if crispr_success_mask[patient_idx] and (target_start <= pos < target_end):
-            # Target range knockdown: 85% real mutation likelihood vs 15% missed cuts
-            mutation_matrix[patient_idx, pos] = np.random.choice([1, 0], p=[0.85, 0.15])
+            mutation_matrix[patient_idx, pos] = np.random.choice(binary_options, p=[0.85, 0.15])
         else:
-            # Out-of-bounds metrics: Regulated by standard baseline sequencing noise
-            mutation_matrix[patient_idx, pos] = np.random.choice([1, 0], p=[base_error_rate, 1 - base_error_rate])
+            mutation_matrix[patient_idx, pos] = np.random.choice(binary_options, p=[base_error_rate, 1 - base_error_rate])
 
 # Package dynamic arrays into a clear pandas analytical block
 patient_ids = [f"Patient_{i+1:02d}" for i in range(n_patients)]
@@ -142,32 +143,76 @@ with m3:
     else:
         st.error("🚨 BACKGROUND NOISE DOMINANT")
 
-# Build the custom Matplotlib rendering canvas using high-visibility neon colors for GIF processing
+# Build the custom Matplotlib rendering canvas using high-visibility 4K cinematic overrides
 fig, ax = plt.subplots(figsize=(14, 5.5))
-# Matte slate background with hyper-vibrant pink mutation indicator blocks
-sns.heatmap(df_matrix, cmap=["#2c3e50", "#e056fd"], cbar=False, linewidths=0.8, linecolor="#34495e", ax=ax)
+fig.patch.set_facecolor('#0b132b')  # Dark navy canvas match
+ax.set_facecolor('#0b132b')
 
-ax.set_title("Variant Cleavage Matrix Map (Vibrant Pink = Target Base Knocked Out / Absent)", fontsize=12, weight='bold', pad=15)
-ax.set_xlabel("Genomic Sequence Base Identifiers & Coordinate Index positions", fontsize=10, labelpad=8)
-ax.set_ylabel("Simulated Patient Sample Fields", fontsize=10)
+# Dark Navy Canvas Background map populated with Midnight Blue (#1c2541) and Magenta (#e056fd) node indicators
+custom_cmap = sns.color_palette(["#1c2541", "#e056fd"], as_cmap=True)
+sns.heatmap(df_matrix, cmap=custom_cmap, cbar=False, linewidths=1.2, linecolor="#0b132b", ax=ax)
+
+ax.set_title("Variant Cleavage Matrix Map (Vibrant Magenta = Target Base Knocked Out / Absent)", color='#48dbfb', fontsize=12, weight='bold', pad=15, family='monospace')
+ax.set_xlabel("Genomic Sequence Base Identifiers & Coordinate Index positions", color='#e0e1dd', fontsize=10, labelpad=8, family='monospace')
+ax.set_ylabel("Simulated Patient Sample Fields", color='#e0e1dd', fontsize=10, family='monospace')
+ax.tick_params(colors='#e0e1dd', labelsize=9)
 
 # Drop sharp neon yellow coordinate boundary wirelines over target coordinates
-ax.axvline(x=target_start, color='#ffea00', linestyle='--', linewidth=2.5, label="CRISPR Target Envelope Bounds")
-ax.axvline(x=target_end, color='#ffea00', linestyle='--', linewidth=2.5)
+ax.axvline(x=target_start, color='#fffa65', linestyle=':', linewidth=2.5, alpha=0.8)
+ax.axvline(x=target_end, color='#fffa65', linestyle=':', linewidth=2.5, alpha=0.8)
 
 # Render completed visual element to interface window
 st.pyplot(fig)
+plt.close(fig)  # Memory safety cleanup
 st.markdown("---")
 
-# ----------------------------------------------------------------------------------------------------
-# COMPREHENSIVE SPREADSHEET EXPORT BLOCK
-# ----------------------------------------------------------------------------------------------------
-st.subheader("💾 Step 3: Streamlit Data Infrastructure Export")
-st.markdown("Extract the evaluated model array below into standard formats for external pipeline ingestion steps.")
+# 5. INTERACTIVE COORDINATE MUTATION OVERLAY MODULE
+st.subheader("🔍 Step 3: Interactive Coordinate Mutation Overlay")
+st.markdown("*Select a coordinate node to isolate specific structural variants parsed by the deep learning framework.*")
 
-csv_data = df_matrix.to_csv().encode('utf-8')
-st.download_button(
-    label="📥 Download Variant Cleavage Matrix Spreadsheet (.csv)",
+o_col1, o_col2 = st.columns(2)
+with o_col1:
+    selected_patient = st.selectbox("🎯 Target Patient Record Row", options=patient_ids)
+with o_col2:
+    selected_base = st.selectbox("🧬 Target Base Coordinate Column", options=position_labels)
+
+node_val = df_matrix.loc[selected_patient, selected_base]
+base_idx = position_labels.index(selected_base)
+is_in_target = target_start <= base_idx < target_end
+
+st.markdown(f"### 📊 Micro-Telemetry Node Audit: `{selected_patient}` ── `{selected_base}`")
+
+with st.container():
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.markdown("**Node Structural State:**")
+        if node_val == 1.0:
+            st.markdown("<h3 style='color:#e056fd; margin:0;'>🧬 KNOCKOUT VARIANT PRESENT</h3>", unsafe_allow_html=True)
+        else:
+            st.markdown("<h3 style='color:#1c2541; margin:0;'>⚫ PASSIVE WILDTYPE BASE</h3>", unsafe_allow_html=True)
+    with c2:
+        st.markdown("**CRISPR Envelope Proximity:**")
+        if is_in_target:
+            st.markdown("<h3 style='color:#fffa65; margin:0;'>🎯 INSIDE TARGET EXON</h3>", unsafe_allow_html=True)
+        else:
+            st.markdown("<h3 style='color:#48dbfb; margin:0;'>🌐 BACKGROUND REGION</h3>", unsafe_allow_html=True)
+    with c3:
+        st.markdown("**Architectural Class Assignment:**")
+        if is_in_target and node_val == 1.0:
+            st.info("Intended Cleavage Signalling")
+        elif not is_in_target and node_val == 1.0:
+            st.warning("Off-Target Sequencing Noise Event")
+        else:
+            st.success("Stable Unmodified Base Domain")
+
+st.markdown("---")
+
+# 6. COMPREHENSIVE SPREADSHEET EXPORT BLOCK
+st.subheader("💾 Step 4: Streamlit Data Infrastructure Export")
+st.markdown("Extract the evaluated model array below into standard formats for external pipeline ingestion steps.") 
+csv_data = df_matrix.to_csv().encode('utf-8') 
+st.download_button( 
+    label="📥 Download Variant Cleavage Matrix Spreadsheet (.csv)", 
     data=csv_data,
     file_name="bhargava_crispr_simulation_output.csv",
     mime="text/csv"
