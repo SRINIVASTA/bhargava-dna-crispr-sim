@@ -4,6 +4,7 @@ import hashlib
 import json
 import urllib.request
 import urllib.error
+import ssl  # 🛡️ Added to bypass strict container SSL traps
 
 # 🌐 NO-FAIL STANDALONE TELEMETRY ENGINE
 def run_app_telemetry():
@@ -42,7 +43,7 @@ def run_app_telemetry():
             # Final clean payload assembly
             payload = {
                 "Timestamp": now,
-                "App_Name": "bhargava-dna-crispr-sim", 
+                "App_Name": "bhargava-dna-crispr-sim",  # 💡 REMEMBER: Change this identifier string for each separate app!
                 "Session_ID": session_id,
                 "User_Fingerprint": user_fingerprint
             }
@@ -57,9 +58,12 @@ def run_app_telemetry():
                 method='POST'
             )
             
+            # 🔓 CRITICAL FIX: Bypass Streamlit Cloud unverified SSL handshake dropped blocks
+            ssl_context = ssl._create_unverified_context()
+            
             # Dispatches request and bypasses the Google Macro 302 redirects
             try:
-                with urllib.request.urlopen(req, timeout=5) as response:
+                with urllib.request.urlopen(req, timeout=5, context=ssl_context) as response:
                     response.read()
             except urllib.error.HTTPError:
                 pass 
@@ -72,7 +76,7 @@ def run_app_telemetry():
 run_app_telemetry()
 
 # ────────────────────────────────────────────────────────
-# 🥞 YOUR ORIGINAL SMARTBHOJAN CODE CONTINUES NORMALLY BELOW:
+# 🥞 YOUR ORIGINAL CODE CONTINUES NORMALLY BELOW:
 # ────────────────────────────────────────────────────────
 
 
