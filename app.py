@@ -1,3 +1,81 @@
+import streamlit as st
+import datetime
+import hashlib
+import json
+import urllib.request
+import urllib.error
+
+# 🌐 NO-FAIL STANDALONE TELEMETRY ENGINE
+def run_app_telemetry():
+    if "analytics_logged" not in st.session_state:
+        try:
+            now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            # 🛡️ FALLBACK 1: Safe Context Header Extraction
+            user_agent = "Unknown_Agent"
+            try:
+                if hasattr(st, "context") and hasattr(st.context, "headers"):
+                    user_agent = st.context.headers.get("user-agent", "Unknown_Agent")
+            except Exception:
+                pass
+
+            # 🛡️ FALLBACK 2: Safe IP Extraction
+            user_ip = "Local_IP"
+            try:
+                if hasattr(st, "context") and hasattr(st.context, "ip_address"):
+                    user_ip = st.context.ip_address or "Local_IP"
+            except Exception:
+                pass
+            
+            # Anonymize profile using fallbacks
+            user_fingerprint = hashlib.sha256(f"{user_agent}-{user_ip}".encode()).hexdigest()[:16]
+            
+            # 🛡️ FALLBACK 3: Safe Session Extraction
+            session_id = "Static_Session"
+            try:
+                ctx = st.runtime.scriptrunner.script_run_context.get_script_run_ctx()
+                if ctx and hasattr(ctx, "session_id"):
+                    session_id = ctx.session_id
+            except Exception:
+                pass
+
+            # Final clean payload assembly
+            payload = {
+                "Timestamp": now,
+                "App_Name": "bhargava-dna-crispr-sim", 
+                "Session_ID": session_id,
+                "User_Fingerprint": user_fingerprint
+            }
+
+            # Outbound deployment target endpoint
+            tracking_endpoint = "https://google.com"
+
+            req = urllib.request.Request(
+                tracking_endpoint, 
+                data=json.dumps(payload).encode('utf-8'), 
+                headers={'Content-Type': 'application/json'},
+                method='POST'
+            )
+            
+            # Dispatches request and bypasses the Google Macro 302 redirects
+            try:
+                with urllib.request.urlopen(req, timeout=5) as response:
+                    response.read()
+            except urllib.error.HTTPError:
+                pass 
+                
+            st.session_state.analytics_logged = True
+        except Exception:
+            pass
+
+# Instantly trigger metrics collection on user load
+run_app_telemetry()
+
+# ────────────────────────────────────────────────────────
+# 🥞 YOUR ORIGINAL SMARTBHOJAN CODE CONTINUES NORMALLY BELOW:
+# ────────────────────────────────────────────────────────
+
+
 import io
 import streamlit as st
 import numpy as np
